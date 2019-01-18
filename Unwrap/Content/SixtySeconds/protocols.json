@@ -2,8 +2,8 @@
     "title": "Protocols",
     "postscript": "You can use <code>{ get set }</code> in your protocols to make read-write variables, or just <code>{ get }</code> to make read-only variables. Using just <code>{ set }</code> is not allowed.",
     "reviewType": "singleSelection",
-    "question": "Which of these are valid protocols?",
-    "hint": "The four differences between classes and structs are inheritance, copying, deinitializers, and mutability.",
+    "question": "This is a valid protocol – true or false?",
+    "hint": "Protocols can declare properties as read-only, but not write-only.",
     "syntaxHighlighting": true,
     "correct": [
         "protocol Purchaseable {\n\tvar price: Double { get set }\n\tvar currency: String { get set }\n}",

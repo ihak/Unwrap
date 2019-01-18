@@ -38,7 +38,7 @@ class CountingLabel: UILabel {
         // Configure our animation to happen using a CADisplayLink, so the work happens as soon as frame draw ends.
         displayLink = CADisplayLink(target: self, selector: #selector(updateCount))
         displayLink?.preferredFramesPerSecond = preferredFramesPerSecond
-        displayLink?.add(to: RunLoop.current, forMode: .commonModes)
+        displayLink?.add(to: RunLoop.current, forMode: .common)
 
         fromValue = start
         currentValue = start
@@ -52,18 +52,14 @@ class CountingLabel: UILabel {
             currentValue += changeSpeed
 
             if currentValue > targetValue {
-                // Target reached; clamp it and stop doing more work.
-                currentValue = targetValue
-                displayLink?.invalidate()
+                stopWorking()
             }
         } else {
             // We need to subtract numbers to reach our target.
             currentValue -= changeSpeed
 
             if currentValue < targetValue {
-                // Target reached; clamp it and stop doing more work.
-                currentValue = targetValue
-                displayLink?.invalidate()
+                stopWorking()
             }
         }
 
@@ -73,5 +69,11 @@ class CountingLabel: UILabel {
         } else {
             attributedText = NSAttributedString.makeTitle(title, subtitle: currentValue.formatted)
         }
+    }
+
+    // Target reached; clamp it and stop doing more work.
+    private func stopWorking() {
+        currentValue = targetValue
+        displayLink?.invalidate()
     }
 }

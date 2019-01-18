@@ -31,11 +31,12 @@
 	{
 		"name": "Operators and conditions",
 		"sections": [
-			"Arithmetic Operators",
+			"Arithmetic operators",
 			"Operator overloading",
 			"Compound assignment operators",
 			"Comparison operators",
 			"Conditions",
+			"Combining conditions",
 			"The ternary operator",
 			"Switch statements",
 			"Range operators",

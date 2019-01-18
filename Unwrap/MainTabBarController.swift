@@ -23,15 +23,19 @@ class MainTabBarController: UITabBarController, Storyboarded {
     }
 
     /// If we get some launch options, figure out which one was requested and jump right to the correct tab.
-    func handle(_ launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
-        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
-            if shortcutItem.type == "com.hackingwithswift.unwrap.challenges" {
-                selectedViewController = challenges.navigationController
-            } else if shortcutItem.type == "com.hackingwithswift.unwrap.news" {
-                selectedViewController = news.navigationController
-            } else {
-                fatalError("Unknown shortcut item type: \(shortcutItem.type).")
-            }
+    func handle(_ launchOptions: [UIApplication.LaunchOptionsKey: Any]?) {
+        if let item = launchOptions?[.shortcutItem] as? UIApplicationShortcutItem {
+            handle(shortcutItem: item)
+        }
+    }
+
+    func handle(shortcutItem: UIApplicationShortcutItem) {
+        if shortcutItem.type == "com.hackingwithswift.unwrapswift.challenges" {
+            selectedViewController = challenges.navigationController
+        } else if shortcutItem.type == "com.hackingwithswift.unwrapswift.news" {
+            selectedViewController = news.navigationController
+        } else {
+            fatalError("Unknown shortcut item type: \(shortcutItem.type).")
         }
     }
 }

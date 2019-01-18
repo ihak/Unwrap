@@ -9,10 +9,10 @@ target 'Unwrap' do
   inhibit_all_warnings!
 
   # Pods for Unwrap
-  pod 'SwiftEntryKit', '0.5.5'
+  pod 'SwiftEntryKit', '0.8.4'
   pod 'SDWebImage', '~> 4.0'
   pod 'MKRingProgressView', '~> 2.0'
-  pod 'SourceEditor', '~> 1.0'
+  pod 'SourceEditor', :git => 'https://github.com/louisdh/source-editor.git', :branch => 'master'
   pod 'DZNEmptyDataSet', '~> 1.8'
 
   target 'UnwrapTests' do
@@ -29,6 +29,12 @@ target 'Unwrap' do
     installer.pods_project.build_configurations.each do |config|
       config.build_settings.delete('CODE_SIGNING_ALLOWED')
       config.build_settings.delete('CODE_SIGNING_REQUIRED')
+    end
+
+    installer.pods_project.targets.each do |target|
+      target.build_configurations.each do |config|
+          config.build_settings['SWIFT_VERSION'] = '4.1'
+      end
     end
   end
 end
